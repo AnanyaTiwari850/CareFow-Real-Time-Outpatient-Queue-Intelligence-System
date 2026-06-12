@@ -1,190 +1,76 @@
-# 🏥 CareFlow
-### Real-Time Outpatient Queue Intelligence System
+🏥 CareFlow
+Real-Time Outpatient Queue System
 
-> "Know Before You Go"
+CareFlow helps patients check doctor queues and estimated waiting time before visiting a clinic.
 
-CareFlow is a HealthTech web application that enhances doctor discovery by providing real-time clinic transparency, estimated waiting times, patient queue insights, and appointment management.
+🚀 Features
+👨‍⚕️ Browse doctors by specialization
+⏳ See estimated waiting time
+📊 Live patient queue updates
+📅 Book appointments
+🩺 Doctor dashboard for updating queue
+📱 Simple and responsive UI
+💡 Problem
 
----
+Many patients book appointments online but still wait a long time in clinics because there is:
 
-## 🚀 Problem Statement
+No live queue system
+No waiting time visibility
+No idea about clinic workload
 
-Patients often face long and unpredictable waiting times at outpatient clinics.
+This causes:
 
-Even after booking appointments, they still have no visibility into:
+Time waste
+Overcrowding
+Poor patient experience
+✅ Solution
 
-- ⏳ Current waiting time
-- 👥 Number of patients in queue
-- 🏥 Clinic workload
-- 📅 Real-time appointment flow
+CareFlow shows:
 
-This results in:
-- Time wastage
-- Overcrowding
-- Frustration
-- Poor patient experience
+Number of patients waiting
+Estimated waiting time
+Live clinic status
 
----
+So patients can decide the best time to visit.
 
-## 💡 Our Solution
+🧠 Waiting Time Formula
 
-CareFlow combines doctor discovery with real-time queue intelligence.
+Waiting Time=Patients Waiting×Average Consultation Time
 
-Patients can view clinic workload before leaving home and choose the most convenient doctor based on waiting time and queue status.
+🛠️ Tech Stack
+Frontend
+React.js
+HTML
+CSS
+JavaScript
+Backend
+Node.js
+Express.js
+Database
+PostgreSQL
+Supabase
 
----
 
-## ✨ Key Features
+▶️ Run Project
+# Install dependencies
+npm install
 
-### 👨‍⚕️ Doctor Discovery
-- Browse doctors by specialization
-- View detailed doctor profiles
+# Start frontend
+npm run dev
 
-### ⏱️ Waiting Time Estimation
-- Live estimated waiting time
-- Queue visibility
+# Start backend
+npm start
+🌟 Future Improvements
+AI waiting time prediction
+Real-time updates using WebSockets
+Mobile app
+Multi-clinic support
 
-### 📅 Appointment Booking
-- Schedule appointments easily
-- Better visit planning
+👩‍💻 Team InnovHer
+Ananya Tiwari
+Pratyaksha Sahu
+Rudranshi Malhotra
 
-### 📊 Doctor Dashboard
-- Update queue status
-- Manage patient flow
+❤️ Thank You
 
-### 📱 Responsive Interface
-- User-friendly and accessible design
-
----
-
-## 🖥️ Project Preview
-
-### Home Page
-- Doctor search
-- Clinic overview
-- Navigation dashboard
-
-### Doctor Listings
-- Specialization filters
-- Doctor profiles
-- Queue information
-
-### Appointment Module
-- Booking workflow
-- Waiting-time display
-
----
-
-## ⚙️ MVP Logic
-
-```text
-Estimated Waiting Time
-=
-Patients Waiting × Average Consultation Duration
-```
-
-This enables patients to make informed decisions before visiting a clinic.
-
----
-
-## 🔄 System Workflow
-
-```text
-Patient
-   ↓
-Select Specialization
-   ↓
-Fetch Doctor Data
-   ↓
-Display Queue Status
-   ↓
-Calculate Waiting Time
-   ↓
-Book Appointment
-   ↓
-Doctor Updates Queue
-   ↓
-Live Status Reflected
-```
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-- HTML5
-- CSS3
-- JavaScript
-
-### Backend
-- Node.js
-- Express.js
-
-### Database
-- MongoDB
-
-### APIs
-- REST APIs
-- Axios
-
----
-
-## 🌟 Innovation
-
-Unlike traditional appointment platforms, CareFlow focuses on:
-
-✅ Real-time queue visibility
-
-✅ Operational transparency
-
-✅ Workload-based decision making
-
-✅ Better patient experience
-
----
-
-## 📈 Future Scope
-
-- 🤖 AI-based waiting time prediction
-- ⚡ WebSocket real-time updates
-- 🚑 Smart prioritization for urgent cases
-- ☁️ Multi-clinic cloud deployment
-- 🏥 Hospital ERP integration
-- 📱 Mobile application
-
----
-
-## 🎯 Expected Impact
-
-- Reduced waiting-time uncertainty
-- Improved patient experience
-- Better clinic workload management
-- Increased operational transparency
-- Smarter healthcare decisions
-
----
-
-## 👩‍💻 Team InnovHer
-
-| Name | Role |
-|--------|--------|
-| Ananya Tiwari | Team Leader |
-| Rudranshi Malhotra | Team Member |
-| Pratyaksha Sahu | Team Member |
-| Priyanshi Pandey | Team Member |
-
----
-
-## 🏆 Hackathon Track
-
-**HealthTech / Open Innovation**
-
----
-
-## 📜 License
-
-Developed as a Hackathon MVP for innovation and educational purposes.
-
----
-
-### ❤️ Building Transparent Healthcare, One Queue at a Time.
+Made for Hackathon Project 🚀
