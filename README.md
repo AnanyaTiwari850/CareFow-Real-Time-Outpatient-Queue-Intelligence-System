@@ -47,7 +47,7 @@ So patients can decide the best time to visit.
 
 # 🧠 Waiting Time Formula
 
-\text{Waiting Time} = \text{Patients Waiting} \times \text{Average Consultation Time}
+{Waiting Time} = {Patients Waiting}*{Average Consultation Time}
 
 ---
 
@@ -83,20 +83,6 @@ C --> D[See Waiting Time]
 D --> E[Book Appointment]
 ```
 
-# ▶️ Run Project
-
-```bash id="jq5zyw"
-# Install dependencies
-npm install
-
-# Start frontend
-npm run dev
-
-# Start backend
-npm start
-```
-
----
 
 # 🌟 Future Improvements
 
