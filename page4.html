@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CareFlow – Book Appointment</title>
+
+  <!-- Link to our CSS file -->
+  <link rel="stylesheet" href="page4.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav>
+    <a class="logo" href="home.html">CareFlow</a>
+    <button class="btn-back" onclick="history.back()">← Back</button>
+  </nav>
+
+  <!-- ==================== BREADCRUMB ==================== -->
+  <div class="breadcrumb">
+    <a href="home.html">Home</a> &rsaquo;
+    <a href="doctors.html">Doctors</a> &rsaquo;
+    <a href="page3.html" id="breadDoctorLink">Doctor Profile</a> &rsaquo;
+    <span>Book Appointment</span>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <div class="main">
+
+    <!-- LEFT SIDE: Booking form -->
+    <div class="left-col">
+
+      <!-- CARD 1: Doctor summary strip -->
+      <div class="card doctor-strip">
+        <!-- Emoji avatar filled by JS -->
+        <div class="strip-avatar" id="stripEmoji">👨‍⚕️</div>
+        <div class="strip-info">
+          <!-- Doctor name and degree filled by JS -->
+          <div class="strip-name" id="stripName">Dr. Name</div>
+          <div class="strip-degree" id="stripDegree">Degree</div>
+          <div class="strip-clinic" id="stripClinic">📍 Clinic</div>
+        </div>
+        <!-- Wait time badge filled by JS -->
+        <div class="strip-wait">
+          <div class="wait-badge">
+            <span>⏱</span>
+            <span id="stripWait">-- mins</span>
+            <span class="wait-small">Est. Wait (<span id="stripPatients">--</span> Patients)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: Select Date -->
+      <div class="card">
+        <h3>Select Date</h3>
+
+        <!-- Row of 5 date buttons — built by JavaScript -->
+        <div class="date-row" id="dateRow">
+          <!-- JS will fill these in -->
+        </div>
+      </div>
+
+      <!-- CARD 3: Select Time Slot -->
+      <div class="card">
+        <h3>Select Time Slot</h3>
+
+        <!-- Morning slots -->
+        <div class="slot-label">Morning</div>
+        <div class="slot-row" id="morningSlots">
+          <!-- JS will fill these in -->
+        </div>
+
+        <!-- Evening slots -->
+        <div class="slot-label" style="margin-top: 14px;">Evening</div>
+        <div class="slot-row" id="eveningSlots">
+          <!-- JS will fill these in -->
+        </div>
+      </div>
+
+      <!-- CARD 4: Patient Details Form -->
+      <div class="card">
+        <h3>Patient Details</h3>
+
+        <div class="form-row">
+          <!-- Full name input -->
+          <div class="form-group">
+            <label for="patientName">Full Name</label>
+            <input type="text" id="patientName" placeholder="Enter your full name" />
+          </div>
+
+          <!-- Phone number input -->
+          <div class="form-group">
+            <label for="patientPhone">Phone Number</label>
+            <input type="tel" id="patientPhone" placeholder="Enter mobile number" maxlength="10" />
+          </div>
+        </div>
+
+        <!-- Age and Gender row -->
+        <div class="form-row" style="margin-top: 14px;">
+          <div class="form-group">
+            <label for="patientAge">Age</label>
+            <input type="number" id="patientAge" placeholder="Your age" min="1" max="120" />
+          </div>
+          <div class="form-group">
+            <label for="patientGender">Gender</label>
+            <select id="patientGender">
+              <option value="">Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Important notes box -->
+        <div class="note-box">
+          <div class="note-title">📌 Important Note</div>
+          <ul class="note-list">
+            <li>Please arrive on time for your appointment</li>
+            <li>Your slot is confirmed after successful booking</li>
+            <li>You will be notified in case of any delay</li>
+          </ul>
+        </div>
+
+        <!-- Confirm Booking button — calls confirmBooking() in JS -->
+        <button class="btn-confirm" onclick="confirmBooking()">
+          ✅ Confirm Booking
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE: Booking summary -->
+    <div class="right-col">
+
+      <!-- Summary card — updates as user selects date/time -->
+      <div class="card summary-card">
+        <h3>Booking Summary</h3>
+
+        <div class="summary-row">
+          <span class="s-label">Doctor</span>
+          <span class="s-val" id="sumDoctor">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Specialization</span>
+          <span class="s-val" id="sumSpec">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Date</span>
+          <!-- This updates when user clicks a date -->
+          <span class="s-val" id="sumDate">Not selected</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Time Slot</span>
+          <!-- This updates when user clicks a time slot -->
+          <span class="s-val" id="sumTime">Not selected</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Est. Wait</span>
+          <span class="s-val" id="sumWait">—</span>
+        </div>
+
+        <!-- Divider line -->
+        <hr class="summary-divider" />
+
+        <div class="summary-row fee-row">
+          <span class="s-label">Consultation Fee</span>
+          <span class="s-val fee-val" id="sumFee">—</span>
+        </div>
+      </div>
+
+      <!-- Help box -->
+      <div class="card help-card">
+        <div class="help-title">Need help?</div>
+        <div class="help-text">Call us at <strong>+91 98765 43210</strong></div>
+        <div class="help-text" style="margin-top: 4px;">or email <strong>careflow.support@gmail.com</strong></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== SUCCESS POPUP ==================== -->
+  <!-- This is hidden by default. JS shows it after booking -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-box">
+      <div class="popup-icon">🎉</div>
+      <div class="popup-title">Booking Confirmed!</div>
+      <div class="popup-msg" id="popupMsg">Your appointment has been booked.</div>
+      <button class="popup-btn" onclick="window.location.href='home.html'">
+        Go to Home
+      </button>
+    </div>
+  </div>
+
+  <!-- Local DB layer -->
+  <script src="db.js"></script>
+  <script src="page4.js"></script>
+  <script src="theme.js"></script>
+
+</body>
+</html>

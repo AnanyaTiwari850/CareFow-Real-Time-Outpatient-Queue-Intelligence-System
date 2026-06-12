@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareFlow — About Us</title>
+  <meta name="description" content="Learn about CareFlow — a HealthTech platform providing real-time queue intelligence for smarter, more transparent clinic visits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue:   #3b82f6;
+      --green:  #10b981;
+      --purple: #8b5cf6;
+      --bg:     #060d1a;
+      --card:   rgba(15, 23, 42, 0.7);
+      --border: rgba(255,255,255,0.07);
+      --text:   #e2e8f0;
+      --muted:  #64748b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Fixed noise grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Floating orbs ── */
+    .orb { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.18; pointer-events: none; }
+    .orb1 { width:500px; height:500px; background:radial-gradient(circle,#3b82f6,transparent); top:-150px; left:-150px; animation: drift 14s ease-in-out infinite alternate; }
+    .orb2 { width:380px; height:380px; background:radial-gradient(circle,#10b981,transparent); bottom:0; right:-100px; animation: drift 18s ease-in-out infinite alternate-reverse; }
+    .orb3 { width:280px; height:280px; background:radial-gradient(circle,#8b5cf6,transparent); top:40%; left:55%; animation: drift 11s ease-in-out infinite alternate; }
+    @keyframes drift { from{transform:translate(0,0) scale(1)} to{transform:translate(40px,50px) scale(1.1)} }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px; height: 68px;
+      background: rgba(6, 13, 26, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 22px; font-weight: 800; color: var(--blue);
+      text-decoration: none; letter-spacing: -0.5px;
+    }
+    .logo svg { width: 26px; height: 26px; }
+    .logo span { color: var(--green); }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul li a {
+      font-size: 14px; font-weight: 500; color: #94a3b8;
+      text-decoration: none; transition: color 0.2s;
+    }
+    nav ul li a:hover, nav ul li a.active { color: #fff; }
+    .nav-btns { display: flex; gap: 10px; }
+    .btn-nav {
+      padding: 9px 20px; border-radius: 10px; font-size: 14px;
+      font-weight: 600; font-family: inherit; cursor: pointer; border: none;
+      transition: all 0.2s;
+    }
+    .btn-nav-outline {
+      background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);
+      color: var(--green);
+    }
+    .btn-nav-outline:hover { background: rgba(16,185,129,0.2); }
+    .btn-nav-solid {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: #fff; box-shadow: 0 4px 14px rgba(59,130,246,0.3);
+    }
+    .btn-nav-solid:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.45); }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      position: relative; z-index: 1;
+      padding: 100px 60px 80px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.25);
+      color: #93c5fd; font-size: 13px; font-weight: 600;
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 28px;
+      animation: fadeDown 0.6s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900; line-height: 1.15;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, #fff 0%, #93c5fd 50%, #6ee7b7 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeDown 0.7s 0.1s ease both;
+    }
+    .hero p {
+      font-size: 18px; color: #94a3b8; max-width: 680px;
+      margin: 20px auto 0; line-height: 1.75;
+      animation: fadeDown 0.7s 0.2s ease both;
+    }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── Divider ── */
+    .section-divider {
+      width: 60px; height: 4px; border-radius: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      margin: 0 auto 24px;
+    }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; padding: 80px 60px; }
+    section:nth-child(even) { background: rgba(255,255,255,0.015); }
+
+    .section-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--green); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800; letter-spacing: -0.8px;
+      color: #fff; margin-bottom: 18px;
+    }
+    .section-body {
+      font-size: 16px; color: #94a3b8; line-height: 1.85;
+      max-width: 760px;
+    }
+    .section-body + .section-body { margin-top: 16px; }
+
+    /* ── TWO-COLUMN LAYOUT ── */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: center;
+    }
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+
+    /* ── GLASS CARD ── */
+    .glass-card {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    /* ── WHAT MAKES US DIFFERENT — list ── */
+    .diff-list { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+    .diff-list li {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 15px; color: #cbd5e1; font-weight: 500;
+    }
+    .diff-list li::before {
+      content: '✦';
+      color: var(--green); font-size: 14px; flex-shrink: 0;
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(16,185,129,0.12);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── CORE VALUES GRID ── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .value-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .value-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent, linear-gradient(90deg,#3b82f6,#8b5cf6));
+    }
+    .value-card:hover { transform: translateY(-5px); box-shadow: 0 24px 48px rgba(0,0,0,0.3); }
+    .value-icon {
+      font-size: 32px; margin-bottom: 16px; display: block;
+    }
+    .value-title {
+      font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px;
+    }
+    .value-desc { font-size: 14px; color: #94a3b8; line-height: 1.75; }
+
+    /* ── MISSION / VISION SIDE CARDS ── */
+    .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .mv-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px;
+      position: relative; overflow: hidden;
+    }
+    .mv-card.mission { border-color: rgba(59,130,246,0.25); }
+    .mv-card.vision  { border-color: rgba(16,185,129,0.25); }
+    .mv-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--glow, rgba(59,130,246,0.04));
+      pointer-events: none;
+    }
+    .mv-icon { font-size: 38px; margin-bottom: 16px; display: block; }
+    .mv-title {
+      font-size: 20px; font-weight: 800; color: #fff;
+      margin-bottom: 14px; letter-spacing: -0.3px;
+    }
+    .mv-body { font-size: 15px; color: #94a3b8; line-height: 1.8; }
+
+    /* ── TAGLINE BANNER ── */
+    .tagline-banner {
+      text-align: center; padding: 80px 60px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(16,185,129,0.06) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .tagline-banner .tag {
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 900; letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff, #93c5fd, #6ee7b7);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .tagline-banner .sub {
+      font-size: 16px; color: #94a3b8; max-width: 560px; margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 28px;
+      font-size: 13px; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--blue); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      nav ul { display: none; }
+      .hero { padding: 70px 24px 60px; }
+      section { padding: 60px 24px; }
+      .two-col, .mv-grid { grid-template-columns: 1fr; }
+      .two-col.reverse { direction: ltr; }
+      .tagline-banner { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="home.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      Care<span>Flow</span>
+    </a>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-btns">
+      <button class="btn-nav btn-nav-outline" onclick="location.href='signup.html'">Sign Up</button>
+      <button class="btn-nav btn-nav-solid"   onclick="location.href='login.html'">Login</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      HealthTech · Queue Intelligence
+    </div>
+    <h1>Welcome to CareFlow</h1>
+    <p>A platform designed to make healthcare visits more transparent, predictable, and patient-friendly — because your time matters.</p>
+  </div>
+
+  <!-- ABOUT INTRO -->
+  <section id="about">
+    <div class="two-col">
+      <div>
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">Bridging the Information Gap in Healthcare</h2>
+        <div class="section-divider"></div>
+        <p class="section-body">
+          While existing healthcare platforms help users find doctors and book appointments, patients often remain unaware of actual clinic conditions — such as waiting time, patient load, and service availability. This lack of visibility frequently results in long waits, uncertainty, and inefficient healthcare experiences.
+        </p>
+        <p class="section-body" style="margin-top:16px;">
+          CareFlow addresses this challenge by introducing <strong style="color:#10b981;">Queue Intelligence</strong> — enabling patients to view real-time clinic information before visiting a healthcare provider. By offering insights such as estimated waiting time, patient queue status, and clinic workload, CareFlow empowers users to make informed decisions and better manage their time.
+        </p>
+      </div>
+      <div class="glass-card" style="text-align:center; padding:48px 36px;">
+        <div style="font-size:72px; margin-bottom:20px; line-height:1;">🏥</div>
+        <div style="font-size:42px; font-weight:900; color:#fff; margin-bottom:6px;">Queue</div>
+        <div style="font-size:42px; font-weight:900; background:linear-gradient(135deg,#3b82f6,#10b981); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Intelligence</div>
+        <p style="margin-top:20px; color:#64748b; font-size:14px; line-height:1.7;">Real-time clinic visibility at your fingertips — before you ever step out the door.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION + VISION -->
+  <section>
+    <div style="text-align:center; margin-bottom:48px;">
+      <div class="section-label">Purpose & Direction</div>
+      <h2 class="section-title">Our Mission &amp; Vision</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="mv-grid">
+      <div class="mv-card mission" style="--glow:rgba(59,130,246,0.04);">
+        <span class="mv-icon">🎯</span>
+        <div class="mv-title">Our Mission</div>
+        <p class="mv-body">
+          To improve the outpatient healthcare experience by providing transparency, accessibility, and real-time information that helps patients plan their clinic visits more efficiently. We believe every patient deserves to know what to expect before they arrive.
+        </p>
+      </div>
+      <div class="mv-card vision" style="--glow:rgba(16,185,129,0.04); border-color:rgba(16,185,129,0.25);">
+        <span class="mv-icon">🔭</span>
+        <div class="mv-title">Our Vision</div>
+        <p class="mv-body">
+          To build a smarter healthcare ecosystem where patients can understand clinic conditions before they visit — helping reduce waiting uncertainty and enabling more efficient healthcare access for everyone, everywhere.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES US DIFFERENT -->
+  <section>
+    <div class="two-col reverse">
+      <div>
+        <div class="section-label">Our Edge</div>
+        <h2 class="section-title">What Makes CareFlow Different?</h2>
+        <div class="section-divider" style="margin:0 0 20px;"></div>
+        <p class="section-body">
+          Unlike traditional doctor-booking platforms, CareFlow focuses on real insights that matter the moment you decide to visit a clinic. Our goal is to bridge the information gap between healthcare providers and patients, making every clinic visit more predictable and convenient.
+        </p>
+        <ul class="diff-list">
+          <li>Real-time clinic transparency</li>
+          <li>Estimated waiting time visibility</li>
+          <li>Patient queue insights</li>
+          <li>Better appointment planning</li>
+          <li>Improved patient experience</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="padding: 40px 36px;">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="display:flex; align-items:center; gap:16px; background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.15); border-radius:14px; padding:18px 20px;">
+            <span style="font-size:28px;">⏱️</span>
+            <div>
+              <div style="font-weight:700; color:#fff; font-size:15px;">Live Wait Time</div>
+              <div style="font-size:13px; color:#64748b; margin-top:3px;">Know exactly how long before you're seen</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:16px; background:rgba(16,185,129,0.07); border:1px solid rgba(16,185,129,0.15); border-radius:14px; padding:18px 20px;">
+            <span style="font-size:28px;">👥</span>
+            <div>
+              <div style="font-weight:700; color:#fff; font-size:15px;">Queue Status</div>
+              <div style="font-size:13px; color:#64748b; margin-top:3px;">See how many patients are ahead of you</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:16px; background:rgba(139,92,246,0.07); border:1px solid rgba(139,92,246,0.15); border-radius:14px; padding:18px 20px;">
+            <span style="font-size:28px;">📊</span>
+            <div>
+              <div style="font-weight:700; color:#fff; font-size:15px;">Clinic Load</div>
+              <div style="font-size:13px; color:#64748b; margin-top:3px;">Understand workload before you go</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE VALUES -->
+  <section>
+    <div style="text-align:center;">
+      <div class="section-label">What We Stand For</div>
+      <h2 class="section-title">Core Values</h2>
+      <div class="section-divider"></div>
+      <p class="section-body" style="margin: 0 auto;">These principles guide every decision we make — from the features we build to the way we serve our users.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card" style="--accent: linear-gradient(90deg,#3b82f6,#6366f1);">
+        <span class="value-icon">🔍</span>
+        <div class="value-title">Transparency</div>
+        <p class="value-desc">Providing clear and reliable information about clinic availability and waiting times — so patients always know what to expect.</p>
+      </div>
+      <div class="value-card" style="--accent: linear-gradient(90deg,#10b981,#06b6d4);">
+        <span class="value-icon">♿</span>
+        <div class="value-title">Accessibility</div>
+        <p class="value-desc">Making healthcare information easy to access and understand for every patient, regardless of technical experience.</p>
+      </div>
+      <div class="value-card" style="--accent: linear-gradient(90deg,#f59e0b,#f97316);">
+        <span class="value-icon">⚡</span>
+        <div class="value-title">Efficiency</div>
+        <p class="value-desc">Helping patients save time and make informed decisions — reducing unnecessary waits and clinic uncertainty.</p>
+      </div>
+      <div class="value-card" style="--accent: linear-gradient(90deg,#8b5cf6,#ec4899);">
+        <span class="value-icon">💡</span>
+        <div class="value-title">Innovation</div>
+        <p class="value-desc">Leveraging technology to solve real-world healthcare challenges and constantly evolving to better serve patients.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAGLINE BANNER -->
+  <div class="tagline-banner">
+    <div class="tag">"CareFlow – Know Before You Go."</div>
+    <p class="sub">Helping patients make informed healthcare decisions through smarter clinic visibility and queue intelligence.</p>
+    <div style="margin-top: 36px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <button onclick="location.href='home.html'" style="padding:14px 32px; border-radius:12px; font-size:15px; font-weight:700; font-family:inherit; cursor:pointer; background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:#fff; border:none; box-shadow:0 6px 20px rgba(59,130,246,0.35); transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Explore CareFlow →</button>
+      <button onclick="location.href='signup.html'" style="padding:14px 32px; border-radius:12px; font-size:15px; font-weight:700; font-family:inherit; cursor:pointer; background:rgba(16,185,129,0.1); color:#10b981; border:1px solid rgba(16,185,129,0.3); transition:all 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.2)'" onmouseout="this.style.background='rgba(16,185,129,0.1)'">Create Account ✨</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="home.html">CareFlow</a> – Because Your Time Matters &nbsp;|&nbsp; Team InnovHer
+  </footer>
+
+</body>
+  <script src="theme.js"></script>
+</html>

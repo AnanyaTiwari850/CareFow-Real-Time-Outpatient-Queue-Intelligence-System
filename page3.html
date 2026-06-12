@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CareFlow – Doctor Profile</title>
+  <link rel="stylesheet" href="page3.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="home.html">
+      CareFlow
+    </a>
+    <!-- Back button on the right -->
+    <button class="btn-back" onclick="history.back()">← Back</button>
+  </nav>
+
+  <!-- Home > Cardiology > Doctor Name -->
+  <div class="breadcrumb">
+    <a href="home.html">Home</a> &rsaquo;
+    <a href="doctors.html">Cardiology</a> &rsaquo;
+    <!-- This will be filled in by JavaScript -->
+    <span id="breadName">Doctor Name</span>
+  </div>
+
+  <!--  MAIN CONTENT  -->
+  <div class="main">
+
+    <!-- LEFT SIDE: Doctor details -->
+    <div class="left-col">
+
+      <!-- CARD 1: Profile Header -->
+      <div class="card">
+        <div class="profile-header">
+          <!-- Doctor emoji avatar - filled by JS -->
+          <div class="avatar" id="docEmoji">👨‍⚕️</div>
+
+          <div class="profile-info">
+            <!-- Doctor name - filled by JS -->
+            <div class="doc-name" id="docName">Dr. Name</div>
+
+            <!-- Degree - filled by JS -->
+            <div class="doc-degree" id="docDegree">Degree</div>
+
+            <!-- Clinic location - filled by JS -->
+            <div class="doc-location">📍 <span id="docClinic">Clinic Name</span></div>
+
+            <!-- Rating and experience badges -->
+            <div class="doc-meta">
+              <span class="meta-tag">⭐ 4.8 (128 reviews)</span>
+              <span class="meta-tag">🏅 10+ Years Experience</span>
+              <span class="meta-tag" id="docSpec">Specialization</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: About the Doctor -->
+      <div class="card">
+        <h3>About Doctor</h3>
+        <!-- Bio text - filled by JS -->
+        <p id="docAbout">Loading...</p>
+      </div>
+
+      <!-- CARD 3: Services and Timings side by side -->
+      <div class="two-col">
+
+        <!-- Services list - filled by JS -->
+        <div class="card">
+          <h3>Services</h3>
+          <ul class="services-list" id="servicesList">
+            <li>Loading...</li>
+          </ul>
+        </div>
+
+        <!-- Clinic timings (same for all doctors in this demo) -->
+        <div class="card">
+          <h3>Timings</h3>
+          <table class="timings-table">
+            <tr>
+              <td>Mon – Sat</td>
+              <td>10:00 AM – 02:00 PM</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>05:00 PM – 08:00 PM</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td class="closed">Closed</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: Queue info and booking -->
+    <div class="right-col">
+
+      <!-- CARD: Live Queue Status -->
+      <div class="card queue-card">
+        <h3>Live Queue Status</h3>
+
+        <!-- Big waiting time number - filled by JS -->
+        <div class="wait-big" id="waitTime">-- mins</div>
+        <div class="wait-label">Estimated Waiting Time</div>
+
+        <!-- Stats row -->
+        <div class="queue-stat">
+          <span class="qs-label">👥 Patients Waiting</span>
+          <span class="qs-val" id="patientsWaiting">--</span>
+        </div>
+        <div class="queue-stat">
+          <span class="qs-label">⏱ Avg. Consult Time</span>
+          <span class="qs-val" id="avgConsult">-- mins</span>
+        </div>
+        <div class="queue-stat">
+          <span class="qs-label">📅 Status</span>
+          <span class="qs-val open-status">● Open Now</span>
+        </div>
+      </div>
+
+      <!-- CARD: Consultation Fee -->
+      <div class="card fee-card">
+        <div class="fee-label">Consultation Fee</div>
+        <!-- Fee - filled by JS -->
+        <div class="fee-amount" id="docFee">₹---</div>
+      </div>
+
+      <!-- Book Appointment Button -->
+      <button class="btn-book" onclick="window.location.href='page4.html'">
+        📅 Book Appointment
+      </button>
+
+      <!-- Add to Favourites Button -->
+      <!-- onclick calls the toggleFav() function in page3.js -->
+      <button class="btn-fav" id="favBtn" onclick="toggleFav()">
+        🤍 Add to Favourites
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Local DB layer -->
+  <script src="db.js"></script>
+  <script src="page3.js"></script>
+  <script src="theme.js"></script>
+
+</body>
+</html>

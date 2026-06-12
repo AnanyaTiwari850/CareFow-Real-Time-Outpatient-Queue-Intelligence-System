@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareFlow — Doctor Portal Login</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="logo-header">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      Care<span>Flow</span>
+    </div>
+    <div class="subtitle">Doctor Dashboard Login Portal</div>
+
+    <!-- Error Alert Banner -->
+    <div class="alert-error" id="errorAlert">
+      <span>⚠️</span> <span id="errorText">Invalid username or password.</span>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loadingMsg" style="text-align:center; color:#10b981; margin-bottom:12px; display:none;">
+      ⏳ Loading doctors...
+    </div>
+
+    <!-- Selection grid for doctors -->
+    <div class="form-group">
+      <label>Select Your Profile</label>
+      <div class="doctor-select-grid" id="doctorGrid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- Login Form -->
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Select your profile or type username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password (default: 123)" required>
+      </div>
+
+      <button type="submit" class="btn-login" id="loginBtn" style="width: 100%;">🚪 Access Dashboard</button>
+    </form>
+
+    <!-- Sign Up prompt -->
+    <div style="text-align:center; margin-top:20px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06);">
+      <p style="font-size:13px; color:#64748b; margin-bottom:12px;">New patient? Create a free account</p>
+      <a href="signup.html" style="
+        display:inline-block;
+        padding:11px 28px;
+        border-radius:10px;
+        border:1px solid rgba(16,185,129,0.35);
+        color:#10b981;
+        font-size:14px;
+        font-weight:600;
+        text-decoration:none;
+        background:rgba(16,185,129,0.06);
+        transition:all 0.2s;
+      " onmouseover="this.style.background='rgba(16,185,129,0.14)'" onmouseout="this.style.background='rgba(16,185,129,0.06)'"
+      >✨ Sign Up Free</a>
+    </div>
+
+    <a href="home.html" class="back-link" style="margin-top:16px;">← Return to Patient Portal</a>
+  </div>
+
+  <!-- Local DB layer -->
+  <script src="db.js"></script>
+  <script src="theme.js"></script>
+
+  <script>
+    let selectedDoctorId = null;
+
+    // Load doctors asynchronously from Supabase
+    async function loadDoctors() {
+      const loadingMsg = document.getElementById("loadingMsg");
+      loadingMsg.style.display = "block";
+
+      const doctors = await window.db.getDoctors();
+      const grid = document.getElementById("doctorGrid");
+      loadingMsg.style.display = "none";
+
+      grid.innerHTML = doctors.map(d => `
+        <div class="doc-select-card" id="card-${d.id}" onclick="selectDoctor(${d.id}, '${d.username}')">
+          <div class="doc-select-avatar">${d.emoji}</div>
+          <div class="doc-select-name">${d.name.split(' ').slice(0,2).join(' ')}</div>
+          <div class="doc-select-spec">${d.spec}</div>
+        </div>
+      `).join('');
+    }
+
+    function selectDoctor(id, username) {
+      if (selectedDoctorId) {
+        const prev = document.getElementById(`card-${selectedDoctorId}`);
+        if (prev) prev.classList.remove("selected");
+      }
+      selectedDoctorId = id;
+      document.getElementById(`card-${id}`).classList.add("selected");
+      document.getElementById("username").value = username;
+      document.getElementById("password").value = "";
+      document.getElementById("password").focus();
+      hideError();
+    }
+
+    function showError(message) {
+      const alert = document.getElementById("errorAlert");
+      document.getElementById("errorText").textContent = message;
+      alert.style.display = "flex";
+    }
+
+    function hideError() {
+      document.getElementById("errorAlert").style.display = "none";
+    }
+
+    async function handleLogin(event) {
+      event.preventDefault();
+      const btn = document.getElementById("loginBtn");
+      btn.textContent = "⏳ Logging in...";
+      btn.disabled = true;
+
+      const usernameInput = document.getElementById("username").value;
+      const passwordInput = document.getElementById("password").value;
+
+      const loggedInDoc = await window.db.loginDoctor(usernameInput, passwordInput);
+
+      if (loggedInDoc) {
+        window.location.href = "page5.html";
+      } else {
+        showError("Invalid credentials. Please verify your password.");
+        btn.textContent = "🚪 Access Dashboard";
+        btn.disabled = false;
+      }
+    }
+
+    // Init
+    loadDoctors();
+  </script>
+</body>
+</html>

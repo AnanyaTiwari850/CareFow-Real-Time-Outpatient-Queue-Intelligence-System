@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CareFlow – Doctor Dashboard</title>
+  <link rel="stylesheet" href="page5.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar">
+
+    <!-- Logo -->
+    <div class="sidebar-logo">CareFlow</div>
+
+    <!-- Navigation menu items -->
+    <!-- onclick calls showSection() from page5.js -->
+    <div class="nav-item active" id="nav-dashboard" onclick="showSection('dashboard')">
+      📊 Dashboard
+    </div>
+    <div class="nav-item" id="nav-queue" onclick="showSection('queue')">
+      👥 Today's Queue
+    </div>
+    <div class="nav-item" id="nav-appointments" onclick="showSection('appointments')">
+      📅 Appointments
+    </div>
+    <div class="nav-item" id="nav-profile" onclick="showSection('profile')">
+      👤 Profile
+    </div>
+
+    <!-- Logout button at the bottom -->
+    <div class="nav-item logout" onclick="logout()">
+      🚪 Logout
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT AREA ===== -->
+  <div class="content">
+
+    <!-- Top bar with doctor name -->
+    <div class="topbar">
+      <div class="topbar-title" id="sectionTitle">Dashboard</div>
+      <div class="topbar-doctor">
+        <span id="doctorNameTop">Dr. Rahul Sharma</span>
+        <div class="doctor-avatar">👨‍⚕️</div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 1: DASHBOARD ===== -->
+    <!-- Each section is a <div> — JS shows/hides them -->
+    <div class="section" id="section-dashboard">
+
+      <!-- 4 stat cards at the top -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Patients Today</div>
+          <div class="stat-num" id="totalPatients">28</div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-label">Patients Waiting</div>
+          <!-- This number is updated by JS when doctor changes queue count -->
+          <div class="stat-num" id="dashWaiting">12</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completed</div>
+          <div class="stat-num" id="dashCompleted">16</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg. Consult Time</div>
+          <div class="stat-num" id="dashAvgTime">15 mins</div>
+        </div>
+      </div>
+
+      <!-- Current Queue section -->
+      <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+          <h3>Current Queue</h3>
+
+          <!-- UPDATE QUEUE COUNT BOX -->
+          <!-- This is the key feature — doctor updates the live count -->
+          <div class="queue-update-box">
+            <div class="queue-update-label">Update Queue Count</div>
+            <div class="queue-update-label" style="font-size:11px; color:#888;">Current Patients Waiting</div>
+            <div class="counter-row">
+              <!-- Minus button calls decreaseQueue() in JS -->
+              <button class="counter-btn" onclick="decreaseQueue()">−</button>
+              <!-- This number updates live -->
+              <span class="counter-num" id="queueCounter">12</span>
+              <!-- Plus button calls increaseQueue() in JS -->
+              <button class="counter-btn" onclick="increaseQueue()">+</button>
+            </div>
+            <div class="queue-update-label" style="margin-top:8px;">Average Consultation Time (approx.)</div>
+            <!-- Dropdown to set average consult time -->
+            <select id="avgTimeSelect" onchange="updateAvgTime()" class="avg-select">
+              <option value="3">3 mins</option>
+              <option value="5">5 mins</option>
+              <option value="10">10 mins</option>
+              <option value="15" selected>15 mins</option>
+              <option value="20">20 mins</option>
+              <option value="30">30 mins</option>
+            </select>
+            <!-- Save button calls saveQueue() in JS -->
+            <button class="btn-save" onclick="saveQueue()">💾 Save & Update</button>
+          </div>
+        </div>
+
+        <!-- Patient queue table -->
+        <table class="queue-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Patient Name</th>
+              <th>Token No.</th>
+              <th>Status</th>
+              <th>Wait Time</th>
+            </tr>
+          </thead>
+          <tbody id="queueTableBody">
+            <!-- JS fills this in -->
+          </tbody>
+        </table>
+
+        <div class="table-note">
+          📝 Note: Update the patient count regularly for accurate waiting time.
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 2: TODAY'S QUEUE ===== -->
+    <div class="section hidden" id="section-queue">
+      <div class="card">
+        <h3>Today's Queue — Full View</h3>
+        <table class="queue-table" style="margin-top:16px;">
+          <thead>
+            <tr>
+              <th>#</th><th>Patient Name</th><th>Token</th><th>Time Slot</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="fullQueueBody">
+            <!-- JS fills this -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 3: APPOINTMENTS ===== -->
+    <div class="section hidden" id="section-appointments">
+      <div class="card">
+        <h3>Today's Appointments</h3>
+        <div class="appt-list" id="apptList">
+          <!-- JS fills this -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 4: PROFILE ===== -->
+    <div class="section hidden" id="section-profile">
+        <div class="card profile-card">
+        <div class="profile-big-avatar">👨‍⚕️</div>
+        <div class="profile-name" id="profileName">Dr. Rahul Sharma</div>
+        <div class="profile-degree" id="profileDegree">MBBS, MD (Cardiology)</div>
+        <div class="profile-clinic" id="profileClinic">📍 City Heart Clinic, Civil Lines</div>
+        <div class="profile-stats">
+            <div class="pstat"><div class="pstat-num">4.8 ⭐</div><div class="pstat-label">Rating</div></div>
+            <div class="pstat"><div class="pstat-num">10+</div><div class="pstat-label">Years Exp.</div></div>
+            <div class="pstat"><div class="pstat-num">₹600</div><div class="pstat-label">Fee</div></div>
+        </div>
+        </div>
+    </div>
+
+    </div><!-- end .content -->
+
+    <!-- Local DB layer -->
+    <script src="db.js"></script>
+    <script src="page5.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>

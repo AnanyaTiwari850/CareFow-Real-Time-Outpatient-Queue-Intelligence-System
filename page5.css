@@ -1,0 +1,414 @@
+/* ============================================================
+   PAGE 5 STYLES — page5.css
+   Doctor Dashboard — sidebar layout
+
+   NEW LAYOUT CONCEPT used here:
+   Instead of top navbar, we use a SIDEBAR + CONTENT layout.
+   This is done with CSS Flexbox on the <body> tag.
+   body = flex container
+   .sidebar = left column (fixed width)
+   .content = right column (fills remaining space)
+============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Make body a flex row so sidebar and content sit side by side */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f8ff;
+  color: #1a2340;
+  display: flex;          /* KEY: makes sidebar + content side by side */
+  min-height: 100vh;      /* at least full screen height */
+}
+
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+.sidebar {
+  width: 200px;
+  background: #1565c0;      /* dark blue */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;   /* stack items top to bottom */
+  padding: 24px 0;
+  position: fixed;          /* stays on screen even when you scroll */
+  top: 0;
+  left: 0;
+  height: 100vh;            /* full screen height */
+  z-index: 100;
+}
+
+.sidebar-logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  padding: 0 20px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  margin-bottom: 16px;
+}
+
+/* Each sidebar menu item */
+.nav-item {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;   /* invisible border by default */
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+}
+
+/* Active menu item — white left border + brighter text */
+.nav-item.active {
+  background: rgba(255,255,255,0.15);
+  color: #ffffff;
+  border-left: 3px solid #00b894;       /* green accent bar */
+}
+
+/* Logout button pushed to the bottom */
+.logout {
+  margin-top: auto;        /* pushes to bottom of flex column */
+  color: #ff8a80;          /* light red */
+}
+
+.logout:hover {
+  background: rgba(255,0,0,0.1);
+  color: #ff5252;
+}
+
+
+/* ============================================================
+   MAIN CONTENT AREA
+============================================================ */
+.content {
+  margin-left: 200px;      /* leave space for the fixed sidebar */
+  flex: 1;                 /* takes all remaining width */
+  padding: 0;
+}
+
+/* Top bar inside content */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: #ffffff;
+  border-bottom: 2px solid #e3eaf8;
+  position: sticky;        /* stays at top when scrolling */
+  top: 0;
+  z-index: 50;
+}
+
+.topbar-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a2340;
+}
+
+.topbar-doctor {
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 14px;
+font-weight: 600;
+color: #444;
+}
+
+.doctor-avatar {
+width: 38px;
+height: 38px;
+border-radius: 50%;
+background: linear-gradient(135deg, #bbdefb, #e0f7fa);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+}
+
+
+/* ============================================================
+   SECTIONS
+   Each section is a div. Only one is visible at a time.
+   JS adds/removes the "hidden" class to show/hide them.
+============================================================ */
+.section {
+padding: 28px 32px 50px;
+}
+
+/* .hidden = display:none means the element is invisible AND takes no space */
+.hidden {
+display: none;
+}
+
+
+/* ============================================================
+STAT CARDS (4 at the top of dashboard)
+============================================================ */
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);   /* 4 equal columns */
+gap: 16px;
+}
+
+.stat-card {
+background: #ffffff;
+border: 2px solid #e3eaf8;
+border-radius: 14px;
+padding: 20px;
+text-align: center;
+}
+
+/* Blue highlighted card for "Patients Waiting" */
+.stat-card.highlight {
+background: #1565c0;
+border-color: #1565c0;
+color: #ffffff;
+}
+
+.stat-label {
+font-size: 12px;
+color: #888;
+margin-bottom: 8px;
+font-weight: 500;
+}
+
+.stat-card.highlight .stat-label {
+color: rgba(255,255,255,0.75);
+}
+
+.stat-num {
+font-size: 32px;
+font-weight: 800;
+color: #1a2340;
+}
+
+.stat-card.highlight .stat-num {
+color: #ffffff;
+}
+
+
+/* ============================================================
+CARD
+============================================================ */
+.card {
+background: #ffffff;
+border-radius: 16px;
+border: 2px solid #e3eaf8;
+padding: 24px;
+}
+
+.card h3 {
+font-size: 16px;
+font-weight: 700;
+color: #1a2340;
+}
+
+/* Card header row: title left, update box right */
+.card-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 20px;
+flex-wrap: wrap;
+gap: 16px;
+}
+
+
+/* ============================================================
+QUEUE UPDATE BOX (the + / - counter)
+============================================================ */
+.queue-update-box {
+background: #f0f4ff;
+border: 2px solid #c3d5f7;
+border-radius: 12px;
+padding: 14px 18px;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 6px;
+min-width: 200px;
+}
+
+.queue-update-label {
+font-size: 12px;
+font-weight: 600;
+color: #555;
+text-align: center;
+}
+
+/* Row with − number + buttons */
+.counter-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* The − and + buttons */
+.counter-btn {
+width: 36px;
+height: 36px;
+border-radius: 50%;         /* makes it a circle */
+background: #1565c0;
+color: #ffffff;
+border: none;
+font-size: 22px;
+font-weight: 700;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+transition: background 0.2s;
+}
+
+.counter-btn:hover { background: #0d47a1; }
+
+/* The big number in the middle */
+.counter-num {
+font-size: 32px;
+font-weight: 800;
+color: #1565c0;
+min-width: 40px;
+text-align: center;
+}
+
+/* Average time dropdown */
+.avg-select {padding: 7px 12px;border: 2px solid #c3d5f7;border-radius: 8px;font-size: 13px;background: #ffffff;color: #333;cursor: pointer;outline: none;width: 100%;
+}
+
+/* Save button */
+.btn-save {background: #00b894;color: #ffffff;border: none;padding: 9px 18px;border-radius: 8px;font-size: 13px;font-weight: 700;cursor: pointer;width: 100%;transition: background 0.2s;
+}
+
+.btn-save:hover { background: #00a381; }
+
+
+/* ============================================================QUEUE TABLE
+============================================================ */
+.queue-table {width: 100%;border-collapse: collapse;font-size: 14px;
+}
+
+.queue-table th {background: #f5f8ff;padding: 10px 12px;text-align: left;font-size: 12px;font-weight: 700;color: #888;border-bottom: 2px solid #e3eaf8;
+}
+
+.queue-table td {padding: 12px 12px;border-bottom: 1px solid #f0f0f0;color: #444;
+}
+
+/* Status badges inside the table */
+.status-badge {padding: 4px 12px;border-radius: 20px;font-size: 12px;font-weight: 700;display: inline-block;
+}
+
+.status-waiting    { background: #fff8e1; color: #e65100; }
+.status-progress   { background: #e8f5e9; color: #2e7d32; }
+.status-completed  { background: #e3eaf8; color: #555; }
+
+.table-note {font-size: 12px;color: #aaa;margin-top: 14px;text-align: center;font-style: italic;
+}
+
+
+/* ============================================================APPOINTMENTS LIST
+============================================================ */
+.appt-list {display: flex;flex-direction: column;gap: 12px;margin-top: 16px;
+}
+
+.appt-item {display: flex;align-items: center;gap: 14px;padding: 14px 16px;background: #f9fbff;border: 1.5px solid #e3eaf8;border-radius: 10px;
+}
+
+.appt-time {font-size: 13px;font-weight: 700;color: #1565c0;min-width: 80px;
+}
+
+.appt-name {
+flex: 1;
+font-size: 14px;
+font-weight: 600;
+color: #1a2340;
+}
+
+.appt-type {
+font-size: 12px;
+color: #888;
+}
+
+/* ===========================================================
+PROFILE CARD
+============================================================ */
+.profile-card {
+max-width: 400px;
+margin: 0 auto;
+text-align: center;
+padding: 36px;
+}
+
+.profile-big-avatar {
+font-size: 64px;
+margin-bottom: 16px;
+}
+
+.profile-name {
+font-size: 22px;
+font-weight: 800;
+color: #1a2340;
+margin-bottom: 6px;
+}
+
+.profile-degree {
+font-size: 14px;
+color: #666;
+margin-bottom: 6px;
+}
+
+.profile-clinic {
+font-size: 13px;
+color: #888;
+margin-bottom: 24px;
+}
+
+.profile-stats {
+display: flex;
+justify-content: center;
+gap: 24px;
+}
+
+.pstat {
+text-align: center;
+}
+
+.pstat-num {
+font-size: 18px;
+font-weight: 800;
+color: #1565c0;
+}
+
+.pstat-label {
+font-size: 12px;
+color: #888;
+margin-top: 4px;
+}
+
+/* ===========================================================
+RESPONSIVE
+============================================================ */
+@media (max-width: 900px) {
+.sidebar {
+    width: 60px; /* collapses to icon-only width */
+}
+.sidebar-logo.nav-item {
+    font-size: 10px;
+    padding: 12px 8px;
+}
+.content {
+    margin-left: 60px;
+}
+.stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+.section {
+    padding: 16px;
+}
+}

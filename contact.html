@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareFlow — Contact Us</title>
+  <meta name="description" content="Get in touch with the CareFlow team. We're here to help patients and healthcare providers connect better.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue:   #3b82f6;
+      --green:  #10b981;
+      --purple: #8b5cf6;
+      --bg:     #060d1a;
+      --card:   rgba(15, 23, 42, 0.75);
+      --border: rgba(255,255,255,0.07);
+      --text:   #e2e8f0;
+      --muted:  #64748b;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Orbs ── */
+    .orb { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.18; pointer-events: none; z-index: 0; }
+    .orb1 { width:480px; height:480px; background:radial-gradient(circle,#3b82f6,transparent); top:-120px; left:-120px; animation:drift 14s ease-in-out infinite alternate; }
+    .orb2 { width:360px; height:360px; background:radial-gradient(circle,#10b981,transparent); bottom:40px; right:-80px; animation:drift 18s ease-in-out infinite alternate-reverse; }
+    .orb3 { width:260px; height:260px; background:radial-gradient(circle,#8b5cf6,transparent); top:45%; left:60%; animation:drift 11s ease-in-out infinite alternate; }
+    @keyframes drift { from{transform:translate(0,0) scale(1)} to{transform:translate(40px,50px) scale(1.1)} }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px; height: 68px;
+      background: rgba(6,13,26,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 22px; font-weight: 800; color: var(--blue);
+      text-decoration: none; letter-spacing: -0.5px;
+    }
+    .logo svg { width:26px; height:26px; }
+    .logo span { color: var(--green); }
+    nav ul { list-style:none; display:flex; gap:32px; }
+    nav ul li a {
+      font-size:14px; font-weight:500; color:#94a3b8;
+      text-decoration:none; transition:color 0.2s;
+    }
+    nav ul li a:hover, nav ul li a.active { color:#fff; }
+    .nav-btns { display:flex; gap:10px; }
+    .btn-nav {
+      padding:9px 20px; border-radius:10px; font-size:14px;
+      font-weight:600; font-family:inherit; cursor:pointer; border:none; transition:all 0.2s;
+    }
+    .btn-outline { background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); color:var(--green); }
+    .btn-outline:hover { background:rgba(16,185,129,0.2); }
+    .btn-solid { background:linear-gradient(135deg,var(--blue),var(--purple)); color:#fff; box-shadow:0 4px 14px rgba(59,130,246,0.3); }
+    .btn-solid:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(59,130,246,0.45); }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; z-index:1;
+      text-align:center; padding:90px 60px 70px;
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25);
+      color:#6ee7b7; font-size:13px; font-weight:600;
+      padding:6px 16px; border-radius:50px; margin-bottom:24px;
+      animation:fadeDown 0.5s ease both;
+    }
+    .hero h1 {
+      font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900;
+      letter-spacing:-1.5px; line-height:1.15;
+      background:linear-gradient(135deg,#fff 0%,#93c5fd 50%,#6ee7b7 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      animation:fadeDown 0.6s 0.1s ease both;
+    }
+    .hero p {
+      font-size:17px; color:#94a3b8; max-width:580px;
+      margin:18px auto 0; line-height:1.75;
+      animation:fadeDown 0.6s 0.2s ease both;
+    }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── MAIN LAYOUT ── */
+    .main {
+      position:relative; z-index:1;
+      display:grid; grid-template-columns:1fr 1.1fr;
+      gap:40px; padding:0 60px 80px; max-width:1280px; margin:0 auto;
+    }
+
+    /* ── CONTACT INFO CARDS ── */
+    .info-col { display:flex; flex-direction:column; gap:20px; }
+
+    .info-card {
+      background:var(--card);
+      backdrop-filter:blur(16px);
+      border:1px solid var(--border);
+      border-radius:18px; padding:28px;
+      display:flex; align-items:flex-start; gap:18px;
+      transition:transform 0.3s, box-shadow 0.3s;
+      animation:fadeUp 0.5s ease both;
+    }
+    .info-card:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(0,0,0,0.3); }
+    .info-card:nth-child(1){animation-delay:0.05s}
+    .info-card:nth-child(2){animation-delay:0.10s}
+    .info-card:nth-child(3){animation-delay:0.15s}
+    .info-card:nth-child(4){animation-delay:0.20s}
+    .info-card:nth-child(5){animation-delay:0.25s}
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    .info-icon {
+      width:48px; height:48px; border-radius:14px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:22px;
+    }
+    .info-icon.blue   { background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.2); }
+    .info-icon.green  { background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.2); }
+    .info-icon.purple { background:rgba(139,92,246,0.12); border:1px solid rgba(139,92,246,0.2); }
+    .info-icon.amber  { background:rgba(251,191,36,0.12); border:1px solid rgba(251,191,36,0.2); }
+    .info-icon.rose   { background:rgba(244,63,94,0.12);  border:1px solid rgba(244,63,94,0.2);  }
+
+    .info-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:5px; }
+    .info-value { font-size:15px; font-weight:600; color:#f1f5f9; margin-bottom:3px; }
+    .info-sub   { font-size:13px; color:var(--muted); }
+
+    /* social row */
+    .social-row { display:flex; gap:12px; margin-top:4px; flex-wrap:wrap; }
+    .social-btn {
+      display:flex; align-items:center; gap:7px;
+      padding:8px 16px; border-radius:10px; font-size:13px; font-weight:600;
+      text-decoration:none; transition:all 0.2s; border:1px solid var(--border);
+      background:rgba(255,255,255,0.04); color:#94a3b8;
+    }
+    .social-btn:hover { background:rgba(255,255,255,0.09); color:#fff; transform:translateY(-1px); }
+
+    /* working hours */
+    .hours-grid { display:flex; flex-direction:column; gap:8px; margin-top:4px; }
+    .hours-row { display:flex; justify-content:space-between; font-size:13px; }
+    .hours-day  { color:#94a3b8; }
+    .hours-time { color:#e2e8f0; font-weight:600; }
+    .hours-time.closed { color:#f87171; }
+
+    /* ── CONTACT FORM ── */
+    .form-card {
+      background:var(--card);
+      backdrop-filter:blur(16px);
+      border:1px solid var(--border);
+      border-radius:24px; padding:44px 40px;
+      animation:fadeUp 0.5s 0.1s ease both;
+    }
+    .form-title {
+      font-size:22px; font-weight:800; color:#fff;
+      margin-bottom:6px; letter-spacing:-0.4px;
+    }
+    .form-subtitle { font-size:14px; color:var(--muted); margin-bottom:32px; }
+
+    .form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .form-group { margin-bottom:20px; display:flex; flex-direction:column; gap:7px; }
+    .form-group label {
+      font-size:12px; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.6px; color:#94a3b8;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background:rgba(15,23,42,0.7);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:12px; padding:13px 16px;
+      color:#f1f5f9; font-family:'Outfit',sans-serif; font-size:14px;
+      outline:none; transition:all 0.2s; resize:none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color:#475569; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color:var(--blue);
+      background:rgba(15,23,42,0.9);
+      box-shadow:0 0 0 3px rgba(59,130,246,0.12);
+    }
+    .form-group select option { background:#1e293b; color:#f1f5f9; }
+
+    .btn-submit {
+      width:100%; padding:15px; border-radius:13px;
+      font-size:16px; font-weight:700; font-family:inherit;
+      background:linear-gradient(135deg,var(--blue) 0%,var(--purple) 100%);
+      color:#fff; border:none; cursor:pointer;
+      box-shadow:0 6px 22px rgba(59,130,246,0.35);
+      transition:all 0.25s;
+    }
+    .btn-submit:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(59,130,246,0.5); }
+    .btn-submit:active { transform:translateY(0); }
+
+    /* ── SUCCESS TOAST ── */
+    .toast {
+      position:fixed; bottom:28px; right:28px; z-index:999;
+      background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3);
+      color:#6ee7b7; border-radius:14px; padding:16px 22px;
+      font-size:14px; font-weight:600; display:none;
+      align-items:center; gap:10px; backdrop-filter:blur(12px);
+      animation:slideInRight 0.4s ease;
+    }
+    @keyframes slideInRight { from{transform:translateX(60px);opacity:0} to{transform:translateX(0);opacity:1} }
+
+    /* ── MAP PLACEHOLDER ── */
+    .map-section {
+      position:relative; z-index:1;
+      padding:0 60px 80px; max-width:1280px; margin:0 auto;
+    }
+    .map-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:24px; overflow:hidden; height:320px;
+      display:flex; align-items:center; justify-content:center;
+      position:relative;
+    }
+    .map-card::before {
+      content:'';
+      position:absolute; inset:0;
+      background:
+        repeating-linear-gradient(0deg, rgba(59,130,246,0.04) 0, rgba(59,130,246,0.04) 1px, transparent 1px, transparent 40px),
+        repeating-linear-gradient(90deg, rgba(59,130,246,0.04) 0, rgba(59,130,246,0.04) 1px, transparent 1px, transparent 40px);
+    }
+    .map-pin {
+      text-align:center; position:relative; z-index:1;
+    }
+    .map-pin .pin-icon { font-size:52px; display:block; margin-bottom:12px; animation:bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .map-pin h3 { font-size:18px; font-weight:800; color:#fff; }
+    .map-pin p  { font-size:14px; color:var(--muted); margin-top:6px; }
+
+    /* ── FOOTER ── */
+    footer {
+      position:relative; z-index:1;
+      text-align:center; padding:28px;
+      font-size:13px; color:var(--muted);
+      border-top:1px solid var(--border);
+    }
+    footer a { color:var(--blue); text-decoration:none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:960px) {
+      nav { padding:0 24px; }
+      nav ul { display:none; }
+      .hero { padding:70px 24px 50px; }
+      .main { grid-template-columns:1fr; padding:0 24px 60px; }
+      .map-section { padding:0 24px 60px; }
+      .form-row-2 { grid-template-columns:1fr; }
+      .form-card { padding:32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="home.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      Care<span>Flow</span>
+    </a>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-btns">
+      <button class="btn-nav btn-outline" onclick="location.href='signup.html'">Sign Up</button>
+      <button class="btn-nav btn-solid"   onclick="location.href='login.html'">Login</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">💬 We'd love to hear from you</div>
+    <h1>Get in Touch</h1>
+    <p>Have a question, feedback, or partnership inquiry? Our team is ready to help you get the most out of CareFlow.</p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- LEFT: Contact Info -->
+    <div class="info-col">
+
+      <!-- Phone -->
+      <div class="info-card">
+        <div class="info-icon blue">📞</div>
+        <div>
+          <div class="info-label">Phone Support</div>
+          <div class="info-value">+91 98765 43210</div>
+          <div class="info-sub">+91 80123 45678 (Toll-free)</div>
+          <div class="info-sub" style="margin-top:6px;">Mon – Sat &nbsp;·&nbsp; 9:00 AM – 7:00 PM IST</div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="info-card">
+        <div class="info-icon green">📧</div>
+        <div>
+          <div class="info-label">Email Us</div>
+          <div class="info-value">support@careflow.health</div>
+          <div class="info-sub">partnerships@careflow.health</div>
+          <div class="info-sub" style="margin-top:6px;">We reply within 24 hours</div>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="info-card">
+        <div class="info-icon purple">📍</div>
+        <div>
+          <div class="info-label">Our Office</div>
+          <div class="info-value">CareFlow Health Technologies Pvt. Ltd.</div>
+          <div class="info-sub">4th Floor, Medicity Tower, Sector 18</div>
+          <div class="info-sub">Noida, Uttar Pradesh — 201301</div>
+          <div class="info-sub">India</div>
+        </div>
+      </div>
+
+      <!-- Working Hours -->
+      <div class="info-card">
+        <div class="info-icon amber">🕐</div>
+        <div style="flex:1;">
+          <div class="info-label">Working Hours</div>
+          <div class="hours-grid" style="margin-top:10px;">
+            <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">9:00 AM – 7:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">10:00 AM – 4:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time closed">Closed</span></div>
+            <div class="hours-row"><span class="hours-day">Public Holidays</span><span class="hours-time closed">Closed</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social -->
+      <div class="info-card">
+        <div class="info-icon rose">🌐</div>
+        <div>
+          <div class="info-label">Follow Us</div>
+          <div class="social-row" style="margin-top:10px;">
+            <a href="#" class="social-btn" onclick="return false;">
+              <span>𝕏</span> Twitter
+            </a>
+            <a href="#" class="social-btn" onclick="return false;">
+              <span>in</span> LinkedIn
+            </a>
+            <a href="#" class="social-btn" onclick="return false;">
+              <span>📸</span> Instagram
+            </a>
+            <a href="#" class="social-btn" onclick="return false;">
+              <span>▶</span> YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Contact Form -->
+    <div class="form-card">
+      <div class="form-title">Send Us a Message</div>
+      <div class="form-subtitle">Fill in the form and click Send — your email app will open with everything ready to go to our support team.</div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label for="cf_fname">First Name</label>
+          <input type="text" id="cf_fname" placeholder="Rahul">
+        </div>
+        <div class="form-group">
+          <label for="cf_lname">Last Name</label>
+          <input type="text" id="cf_lname" placeholder="Sharma">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cf_email">Email Address</label>
+        <input type="email" id="cf_email" placeholder="you@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="cf_phone">Phone Number <span style="font-weight:400;text-transform:none;color:#475569;">(optional)</span></label>
+        <input type="tel" id="cf_phone" placeholder="+91 98765 43210">
+      </div>
+
+      <div class="form-group">
+        <label for="cf_subject">Subject</label>
+        <select id="cf_subject">
+          <option value="" disabled selected>Select a topic</option>
+          <option>General Enquiry</option>
+          <option>Technical Support</option>
+          <option>Doctor / Clinic Onboarding</option>
+          <option>Partnership Opportunity</option>
+          <option>Report a Bug</option>
+          <option>Feedback / Suggestion</option>
+          <option>Media & Press</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="cf_msg">Your Message</label>
+        <textarea id="cf_msg" rows="5" placeholder="Tell us how we can help you…"></textarea>
+      </div>
+
+      <button class="btn-submit" id="cf_submitBtn" onclick="submitForm()">
+        🚀 Send Message
+      </button>
+    </div>
+  </div>
+
+  <!-- MAP PLACEHOLDER -->
+  <div class="map-section">
+    <div class="map-card">
+      <div class="map-pin">
+        <span class="pin-icon">📍</span>
+        <h3>CareFlow HQ — Noida, Uttar Pradesh</h3>
+        <p>4th Floor, Medicity Tower, Sector 18, Noida — 201301</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS TOAST -->
+  <div class="toast" id="toast">
+    ✅ Message sent! We'll be in touch within 24 hours.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="home.html">CareFlow</a> – Because Your Time Matters &nbsp;|&nbsp; Team InnovHer
+  </footer>
+
+  <script>
+    // ── Web3Forms config ──────────────────────────────────────
+    // Get your FREE access key from https://web3forms.com
+    // Enter pratyakshasahu006@gmail.com → check inbox → paste key below
+    const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE'; // ← PASTE YOUR KEY HERE
+    const CONTACT_EMAIL = 'pratyakshasahu006@gmail.com';
+
+    async function submitForm() {
+      const fname   = document.getElementById('cf_fname').value.trim();
+      const lname   = document.getElementById('cf_lname').value.trim();
+      const email   = document.getElementById('cf_email').value.trim();
+      const phone   = document.getElementById('cf_phone').value.trim();
+      const subject = document.getElementById('cf_subject').value;
+      const msg     = document.getElementById('cf_msg').value.trim();
+
+      // Validate
+      if (!fname)   { showFormError('Please enter your first name.'); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormError('Please enter a valid email address.'); return; }
+      if (!subject) { showFormError('Please select a subject.'); return; }
+      if (!msg)     { showFormError('Please write your message.'); return; }
+
+      // Check key is configured
+      if (WEB3FORMS_KEY === 'YOUR_ACCESS_KEY_HERE') {
+        showFormError('Contact form not yet configured. Please check back soon.');
+        return;
+      }
+
+      const btn = document.getElementById('cf_submitBtn');
+      btn.textContent = '⏳ Sending…';
+      btn.disabled = true;
+
+      const fullName = [fname, lname].filter(Boolean).join(' ');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key:  WEB3FORMS_KEY,
+            subject:     `[CareFlow] ${subject} — from ${fullName}`,
+            from_name:   'CareFlow Contact Form',
+            name:        fullName,
+            email:       email,
+            phone:       phone || 'Not provided',
+            topic:       subject,
+            message:     msg,
+            botcheck:    ''
+          })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          // Reset form
+          ['cf_fname','cf_lname','cf_email','cf_phone','cf_msg'].forEach(id => document.getElementById(id).value = '');
+          document.getElementById('cf_subject').selectedIndex = 0;
+          btn.textContent = '🚀 Send Message';
+          btn.disabled = false;
+
+          // Show success toast
+          const toast = document.getElementById('toast');
+          toast.style.display = 'flex';
+          setTimeout(() => { toast.style.display = 'none'; }, 5000);
+        } else {
+          throw new Error(data.message || 'Submission failed');
+        }
+      } catch (err) {
+        console.error('Web3Forms error:', err);
+        showFormError('Could not send. Please email us directly at ' + CONTACT_EMAIL);
+        btn.textContent = '🚀 Send Message';
+        btn.disabled = false;
+      }
+    }
+
+    function showFormError(msg) {
+      const btn = document.getElementById('cf_submitBtn');
+      btn.style.background = 'linear-gradient(135deg,#ef4444,#dc2626)';
+      btn.textContent = '⚠️ ' + msg;
+      setTimeout(() => {
+        btn.style.background = '';
+        btn.textContent = '🚀 Send Message';
+      }, 3000);
+    }
+  </script>
+</body>
+  <script src="theme.js"></script>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareFlow — Create Account</title>
+  <meta name="description" content="Create your CareFlow patient account to book appointments and track queue status in real time.">
+  <link rel="stylesheet" href="signup.css">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+  <!-- Floating background orbs -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="signup-container" role="main">
+
+    <!-- Logo -->
+    <div class="logo-header">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      Care<span>Flow</span>
+    </div>
+    <h1 class="subtitle">Create Your Patient Account</h1>
+    <p class="desc">Join thousands of patients who track queues in real time.</p>
+
+
+    <div class="alert-success" id="successAlert">
+      <span>✅</span>
+      <span id="successText">Account created! Redirecting to login…</span>
+    </div>
+
+    <!-- Error Banner -->
+    <div class="alert-error" id="errorAlert">
+      <span>⚠️</span>
+      <span id="errorText">Something went wrong. Please try again.</span>
+    </div>
+
+    <!-- Progress Steps -->
+    <div class="progress-steps">
+      <div class="step active" id="step-dot-1"><span>1</span><label>Info</label></div>
+      <div class="step-line"></div>
+      <div class="step" id="step-dot-2"><span>2</span><label>Details</label></div>
+      <div class="step-line"></div>
+      <div class="step" id="step-dot-3"><span>3</span><label>Secure</label></div>
+    </div>
+
+    <!-- ── STEP 1: Basic Info ── -->
+    <div class="form-step" id="step-1">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <div class="input-wrap">
+          <span class="input-icon">👤</span>
+          <input type="text" id="fullName" placeholder="Your full name" autocomplete="name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrap">
+          <span class="input-icon">📧</span>
+          <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <div class="input-wrap">
+          <span class="input-icon">📱</span>
+          <input type="tel" id="phone" placeholder="10-digit mobile number" maxlength="10" required>
+        </div>
+      </div>
+      <button class="btn-primary" id="nextBtn1" onclick="goToStep(2)">Continue →</button>
+    </div>
+
+    <!-- ── STEP 2: Personal Details ── -->
+    <div class="form-step hidden" id="step-2">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="age">Age</label>
+          <div class="input-wrap">
+            <span class="input-icon">🎂</span>
+            <input type="number" id="age" placeholder="Age" min="1" max="120" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <div class="input-wrap">
+            <span class="input-icon">⚧</span>
+            <select id="gender" required>
+              <option value="" disabled selected>Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bloodGroup">Blood Group <span class="optional">(optional)</span></label>
+        <div class="input-wrap">
+          <span class="input-icon">🩸</span>
+          <select id="bloodGroup">
+            <option value="">Unknown</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>O+</option><option>O-</option>
+            <option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <div class="input-wrap">
+          <span class="input-icon">🏙️</span>
+          <input type="text" id="city" placeholder="Your city" required>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
+        <button class="btn-primary" onclick="goToStep(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Security ── -->
+    <div class="form-step hidden" id="step-3">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div class="input-wrap">
+          <span class="input-icon">🪪</span>
+          <input type="text" id="username" placeholder="Choose a username" autocomplete="username" required>
+        </div>
+        <div class="hint">Letters, numbers and underscores only</div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input type="password" id="password" placeholder="Min 6 characters" autocomplete="new-password" required>
+          <button type="button" class="toggle-pw" onclick="togglePw('password', this)" tabindex="-1">👁</button>
+        </div>
+        <!-- Password strength bar -->
+        <div class="strength-bar-wrap">
+          <div class="strength-bar" id="strengthBar"></div>
+        </div>
+        <div class="strength-label" id="strengthLabel"></div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔐</span>
+          <input type="password" id="confirmPassword" placeholder="Re-enter your password" autocomplete="new-password" required>
+          <button type="button" class="toggle-pw" onclick="togglePw('confirmPassword', this)" tabindex="-1">👁</button>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="terms-row">
+        <input type="checkbox" id="terms" required>
+        <label for="terms">I agree to the <a href="#" onclick="return false;">Terms of Service</a> and <a href="#" onclick="return false;">Privacy Policy</a></label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="goToStep(2)">← Back</button>
+        <button class="btn-primary" id="submitBtn" onclick="handleSignup()">🚀 Create Account</button>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"><span>Already have an account?</span></div>
+    <a href="login.html" class="btn-outline" id="loginRedirectBtn">🚪 Sign In Instead</a>
+    <a href="home.html" class="back-link">← Return to Home</a>
+  </div>
+
+  <!-- Local DB layer -->
+  <script src="db.js"></script>
+  <script src="theme.js"></script>
+
+  <script>
+    /* ── Step navigation ── */
+    function goToStep(n) {
+      // Validate before advancing
+      if (n === 2 && !validateStep1()) return;
+      if (n === 3 && !validateStep2()) return;
+
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById(`step-${i}`).classList.add('hidden');
+        const dot = document.getElementById(`step-dot-${i}`);
+        dot.classList.remove('active', 'done');
+        if (i < n) dot.classList.add('done');
+        if (i === n) dot.classList.add('active');
+      }
+      document.getElementById(`step-${n}`).classList.remove('hidden');
+      hideAlerts();
+    }
+
+    /* ── Validators ── */
+    function validateStep1() {
+      const name  = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      if (!name) { showError('Please enter your full name.'); return false; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('Please enter a valid email address.'); return false; }
+      if (!phone || !/^\d{10}$/.test(phone)) { showError('Please enter a valid 10-digit phone number.'); return false; }
+      return true;
+    }
+
+    function validateStep2() {
+      const age    = document.getElementById('age').value;
+      const gender = document.getElementById('gender').value;
+      const city   = document.getElementById('city').value.trim();
+      if (!age || age < 1 || age > 120) { showError('Please enter a valid age.'); return false; }
+      if (!gender) { showError('Please select your gender.'); return false; }
+      if (!city) { showError('Please enter your city.'); return false; }
+      return true;
+    }
+
+    /* ── Password strength ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('password').addEventListener('input', function () {
+        const pw = this.value;
+        const bar   = document.getElementById('strengthBar');
+        const label = document.getElementById('strengthLabel');
+        let score = 0;
+        if (pw.length >= 6)  score++;
+        if (pw.length >= 10) score++;
+        if (/[A-Z]/.test(pw)) score++;
+        if (/[0-9]/.test(pw)) score++;
+        if (/[^A-Za-z0-9]/.test(pw)) score++;
+
+        const levels = ['', 'Very Weak', 'Weak', 'Fair', 'Strong', 'Very Strong'];
+        const colors = ['', '#ef4444', '#f97316', '#eab308', '#22c55e', '#10b981'];
+        bar.style.width  = (score * 20) + '%';
+        bar.style.background = colors[score] || 'transparent';
+        label.textContent  = levels[score] || '';
+        label.style.color  = colors[score] || '';
+      });
+    });
+
+    /* ── Toggle password visibility ── */
+    function togglePw(id, btn) {
+      const inp = document.getElementById(id);
+      if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+      else { inp.type = 'password'; btn.textContent = '👁'; }
+    }
+
+    /* ── Alert helpers ── */
+    function showError(msg) {
+      const el = document.getElementById('errorAlert');
+      document.getElementById('errorText').textContent = msg;
+      el.style.display = 'flex';
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    function showSuccess(msg) {
+      const el = document.getElementById('successAlert');
+      document.getElementById('successText').textContent = msg;
+      el.style.display = 'flex';
+    }
+    function hideAlerts() {
+      document.getElementById('errorAlert').style.display  = 'none';
+      document.getElementById('successAlert').style.display = 'none';
+    }
+
+    /* ── Main signup handler ── */
+    async function handleSignup() {
+      hideAlerts();
+      const username  = document.getElementById('username').value.trim().toLowerCase();
+      const password  = document.getElementById('password').value;
+      const confirm   = document.getElementById('confirmPassword').value;
+      const terms     = document.getElementById('terms').checked;
+
+      if (!username || !/^[a-z0-9_]+$/.test(username)) {
+        showError('Username may only contain letters, numbers, and underscores.'); return;
+      }
+      if (password.length < 6) {
+        showError('Password must be at least 6 characters.'); return;
+      }
+      if (password !== confirm) {
+        showError('Passwords do not match.'); return;
+      }
+      if (!terms) {
+        showError('Please accept the Terms of Service to continue.'); return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = '⏳ Creating Account…';
+      btn.disabled = true;
+
+      const userData = {
+        full_name:   document.getElementById('fullName').value.trim(),
+        email:       document.getElementById('email').value.trim().toLowerCase(),
+        phone:       document.getElementById('phone').value.trim(),
+        age:         parseInt(document.getElementById('age').value),
+        gender:      document.getElementById('gender').value,
+        blood_group: document.getElementById('bloodGroup').value || null,
+        city:        document.getElementById('city').value.trim(),
+        username:    username,
+        password:    password
+      };
+
+      const result = await window.db.signupUser(userData);
+
+      if (result.success) {
+        showSuccess('🎉 Account created successfully! Redirecting to login…');
+        setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+      } else {
+        showError(result.error || 'Could not create account. Please try again.');
+        btn.textContent = '🚀 Create Account';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

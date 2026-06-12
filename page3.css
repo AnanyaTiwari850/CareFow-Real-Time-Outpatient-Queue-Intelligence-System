@@ -1,0 +1,408 @@
+/* ============================================================
+   PAGE 3 STYLES — page3.css
+   Each section is labeled so you know what it styles.
+   Colors used:
+     Blue  = #1565c0  (main brand color)
+     Green = #00b894  (verified / open)
+     Light bg = #f5f8ff
+============================================================ */
+
+
+/* ── RESET: Remove default browser spacing ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* makes width/height include padding */
+}
+
+/* ── BODY: Base font and background ── */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f8ff;
+  color: #1a2340;
+}
+
+
+/* ============================================================
+   NAVBAR
+============================================================ */
+nav {
+  display: flex;                  /* puts logo and button side by side */
+  align-items: center;
+  justify-content: space-between; /* logo left, button right */
+  padding: 16px 60px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  position: sticky;               /* stays at top when you scroll */
+  top: 0;
+  z-index: 100;                   /* stays above other content */
+}
+
+/* Logo text */
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1565c0;
+  text-decoration: none;          /* removes underline from the <a> tag */
+}
+
+/* Back button */
+.btn-back {
+  background: #f0f4ff;
+  color: #1565c0;
+  border: 2px solid #1565c0;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;                /* shows hand cursor on hover */
+}
+
+.btn-back:hover {
+  background: #e3eaf8;            /* slightly darker on hover */
+}
+
+
+/* ============================================================
+   BREADCRUMB (the small navigation trail at top)
+============================================================ */
+.breadcrumb {
+  padding: 12px 60px;
+  font-size: 13px;
+  color: #888;
+  background: #ffffff;
+  border-bottom: 1px solid #eef0f8;
+}
+
+.breadcrumb a {
+  color: #1565c0;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   MAIN LAYOUT — two columns side by side
+============================================================ */
+.main {
+  display: flex;          /* puts left and right columns side by side */
+  gap: 24px;              /* space between the two columns */
+  padding: 30px 60px 60px;
+  max-width: 1200px;
+  margin: 0 auto;         /* centers the content */
+}
+
+/* Left column (bigger) */
+.left-col {
+  flex: 2;                /* takes 2 parts of the space */
+  display: flex;
+  flex-direction: column; /* stacks cards vertically */
+  gap: 20px;
+}
+
+/* Right column (smaller) */
+.right-col {
+  flex: 1;                /* takes 1 part of the space */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 280px;
+}
+
+/* Two-column row inside left col (for Services + Timings) */
+.two-col {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;        /* wraps to next line on small screens */
+}
+
+.two-col .card {
+  flex: 1;
+  min-width: 220px;       /* won't shrink below this */
+}
+
+
+/* ============================================================
+   CARD — white rounded box used everywhere
+============================================================ */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 2px solid #e3eaf8;
+  padding: 24px;
+}
+
+
+/* ============================================================
+   PROFILE HEADER CARD
+============================================================ */
+.profile-header {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Doctor emoji circle */
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;             /* makes it a circle */
+  background: linear-gradient(135deg, #bbdefb, #e0f7fa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  flex-shrink: 0;                 /* won't shrink when space is tight */
+}
+
+.profile-info {
+  flex: 1;
+}
+
+/* Doctor's name */
+.doc-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a2340;
+  margin-bottom: 4px;
+}
+
+/* Verified checkmark */
+.verified {
+  color: #00b894;
+}
+
+/* Degree text */
+.doc-degree {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+/* Location text */
+.doc-location {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+/* Row of small badge pills */
+.doc-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-tag {
+  background: #f0f4ff;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1565c0;
+}
+
+
+/* ============================================================
+   ABOUT SECTION
+============================================================ */
+.card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1a2340;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;               /* space between lines */
+}
+
+
+/* ============================================================
+   SERVICES LIST
+============================================================ */
+.services-list {
+  list-style: none;               /* removes default bullet points */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Each service item */
+.services-list li {
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Green checkmark before each item using CSS */
+.services-list li::before {
+  content: "✔";
+  color: #00b894;
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   TIMINGS TABLE
+============================================================ */
+.timings-table {
+  width: 100%;
+  border-collapse: collapse;      /* removes gaps between cells */
+  font-size: 14px;
+}
+
+.timings-table tr td {
+  padding: 8px 4px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+}
+
+/* Day name (first column) */
+.timings-table tr td:first-child {
+  font-weight: 600;
+  color: #333;
+  width: 90px;
+}
+
+/* Red color for "Closed" */
+.closed {
+  color: #e74c3c !important;      /* !important overrides any other rule */
+}
+
+
+/* ============================================================
+   QUEUE CARD (right side)
+============================================================ */
+.queue-card {
+  background: linear-gradient(135deg, #e8f0fe, #f0fff8);
+  border: 2px solid #c3d5f7;
+}
+
+/* Big waiting time number */
+.wait-big {
+  font-size: 38px;
+  font-weight: 900;
+  color: #1565c0;
+  margin: 8px 0 2px;
+}
+
+.wait-label {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 14px;
+}
+
+/* Each stat row inside queue card */
+.queue-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+}
+
+.qs-label {
+  font-size: 13px;
+  color: #666;
+}
+
+.qs-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1565c0;
+}
+
+/* Green "Open Now" text */
+.open-status {
+  color: #00b894 !important;
+}
+
+
+/* ============================================================
+   FEE CARD
+============================================================ */
+.fee-card {
+  text-align: center;
+}
+
+.fee-amount {
+  font-size: 32px;
+  font-weight: 900;
+  color: #1565c0;
+  margin: 6px 0 2px;
+}
+
+.fee-label {
+  font-size: 13px;
+  color: #888;
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+/* Book Appointment - solid blue */
+.btn-book {
+  width: 100%;
+  background: #1565c0;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s; /* smooth color change on hover */
+}
+
+.btn-book:hover {
+  background: #0d47a1;
+}
+
+/* Add to Favourites - outline red */
+.btn-fav {
+  width: 100%;
+  background: #ffffff;
+  color: #e74c3c;
+  border: 2px solid #e74c3c;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.btn-fav:hover {
+  background: #fce4ec;
+}
+
+
+/* ============================================================
+   RESPONSIVE — for smaller screens (phones/tablets)
+   When screen is 900px wide or less, stack columns vertically
+============================================================ */
+@media (max-width: 900px) {
+  nav,
+  .breadcrumb {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .main {
+    flex-direction: column;       /* stack left and right col vertically */
+    padding: 20px 16px 40px;
+  }
+}
